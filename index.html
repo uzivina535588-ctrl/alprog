@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Informasi Statistik - Lombok Tengah</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <style>
+         #map {
+            height: 450px; 
+            width: 100%;
+            border: 2px solid black;
+            margin-top: 20px;
+        }
+        .header-box {
+    border: 2px solid black;
+    padding: 10px;
+    margin-bottom: 10px;
+    }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            margin: 40px;
+        }
+         .judul h1 {
+      font-size: 60px;
+      font-weight: bold;
+      margin: 8px 0;
+    }
+    .judul h2 {
+      font-size: 35px;
+      font-style: italic;
+      margin: 5px 0;
+    }
+        .container {
+           display: flex;               
+            border: 2px solid black;   
+            padding: 0;
+            width: 90%;
+            margin: 0 auto; 
+            box-sizing: border-box;             
+        } 
+         .sidebar {
+            width: 25%;
+            border-right: 2px solid black;  
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        .tabel {
+            width: 78%;
+            padding: 10px 20px;
+            box-sizing: border-box;
+        }
+        .Apapunlah {
+            display: flex;
+            align-items: center;
+        }
+        .logo {
+            width: 40%;
+        }
+        .logo img {
+            width: 250px;
+        }
+        .judul {
+            width: 80%;
+            text-align: center;
+        }
+        .list {
+            width: 25%;
+            line-height: 1.8;
+        }
+        .tabel h3 {
+            font-size: 26px; 
+            text-align: center;
+            margin: 3px;
+        }
+        .tabel h3 small {
+            font-size: 20px; 
+            font-weight: normal;
+            margin: 2px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            text-align: center;
+            margin: 0;
+            font-size: 18px;
+        }
+        th, td {
+            border: 1px solid rgb(7, 7, 7);
+            padding: 6px;
+        }
+        th {
+            background-color: #11cea5;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .sidebar li {
+            margin: 8px 0;
+        }
+        .sidebar a {
+            text-decoration: none;
+            color: black;
+            font-weight: 500;
+        }
+
+        .sidebar a:hover {
+            color: #37e60c;
+            text-decoration: underline;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 12px;
+        }
+        @media (max-width: 768px) {
+        .container {
+            flex-direction: column;
+        }
+        .sidebar, .tabel {
+            width: 100%;
+        }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-box">
+    <div class="Apapunlah">
+        <div class="logo"> 
+            <img src="loteng.png" alt="Logo Lombok Tengah">
+        </div>
+
+        <div class="judul">
+            <h1>SISTEM INFORMASI STATISTIK</h1>
+            <h2>KABUPATEN LOMBOK TENGAH</h2>
+        </div>
+        
+        <div class="list" style="text-align:right;">
+            <a href="index.html" style="text-decoration:none;">login</a>
+        </div> 
+    </div>
+<hr>
+  <div class="container">
+    <div class="sidebar">
+      <div class="list">
+        <ul>
+          <li><a href="https://id.wikipedia.org/wiki/Kabupaten_Lombok_Tengah">
+            Geografi
+        </a>
+    </li>
+          <li><a href="https://data.lomboktengahkab.go.id/download/statistik-dan-spasial-kecamatan-kopang-tahun-2024#:~:text=2.%20Dari%20segi%20letak%20geografis,4.">Iklim</a></li>
+          <li><a href="https://lomboktengahkab.bps.go.id/id/statistics-table/2/MjkjMg%3D%3D/penduduk-kabupaten-lombok-tengah-pertahun.html">Penduduk</a></li>
+          <li><a href="https://data.lomboktengahkab.go.id/dataset/banyaknya-perusahaan-industri-kerajinan-menurut-unit-usaha-tenaga-kerja-dan-investasi-per-kecamatan-di-kabupaten-lombok-tengah/resource/e9d7517d-00e1-4f01-99c5-8418239a556e" target="_blank">Industri</a></li>
+          <li><a href="https://lomboktengahkab.go.id/">Pemerintah</a></li>
+          <li><a href="https://data.ntbprov.go.id/dataset/9f040bf6-9148-42d7-9420-125ee229d599/show">Pariwisata</a></li>
+          <li><a href="http://data.lomboktengahkab.go.id/sektor/keuangan-dan-penganggaran">Keuangan</a></li>
+          <li><a href="https://data.lomboktengahkab.go.id/sektor/sosial">Sosial dan Budaya</a></li>
+            <li><a href="https://lomboktengahkab.bps.go.id/id/publication/2024/12/13/b541acbdceb693838b410452/statistik-kesejahteraan-rakyat-kabupaten-lombok-tengah-2024.html">Kesejahteraan Rakyat</a></li>
+        </ul>
+      </div>
+      </div>
+
+        <div class="tabel">
+            <h3 style="text-align:center;">Tabel Penduduk<br><small>Jumlah Penduduk Lombok Tengah Menurut Jenis Kelamin dan Kecamatan</small></h3>
+            <table>
+                <tr>
+                    <th>Kecamatan</th>
+                    <th>Laki-laki</th>
+                    <th>Perempuan</th>
+                    <th>Jumlah</th>
+                </tr>
+                <tr><td>Praya Barat</td><td>41.919</td><td>42.309</td><td>84.228</td></tr>
+                <tr><td>Praya Barat Daya</td><td>29.128</td><td>29.971</td><td>59.099</td></tr>
+                <tr><td>Pujut</td><td>59.620</td><td>60.21</td><td>120.141</td></tr>
+                <tr><td>Praya Timur</td><td>36.653</td><td>37.414</td><td>74.067</td></tr>
+                <tr><td>Janapria</td><td>43.262</td><td>43.475</td><td>86.737</td></tr>
+                <tr><td>Kopang</td><td>47.088</td><td>47.715</td><td>94.803</td></tr>
+                <tr><td>Praya</td><td>63.509</td><td>64.311</td><td>127.820</td></tr>
+                <tr><td>Praya Tengah</td><td>37.305</td><td>37.438</td><td>74.743</td></tr>
+                <tr><td>Jonggat</td><td>53.734</td><td>54.456</td><td>108.190</td></tr>
+                <tr><td>Pringgarata</td><td>38.715</td><td>38.842</td><td>77.557</td></tr>
+                <tr><td>Batukliang</td><td>45.096</td><td>45.062</td><td>90.158</td></tr>
+                <tr><td>Batukliang Utara</td><td>30.784</td><td>30.715</td><td>61.499</td></tr>
+            </table>
+            <p style="font-size:12px; text-align:center; margin-top:12px;">
+                Sumber: <a href="https://data.lomboktengahkab.go.id/dataset/jumlah-penduduk-lombok-tengah-menurut-jenis-kelamin-dan-kecamatan-di-kabupaten-lombok-tengah/resource/5cc2af90-a7a2-46ee-9784-5e382fa67b8d" target="_blank" style="color: black; text-decoration: none;">BPS Lombok Tengah</a>
+            </p>
+            <h3 style="text-align:center; margin-top:20px;">Peta Kabupaten Lombok Tengah</h3>
+            <div id="map"></div>
+
+            <p style="font-size:13px; text-align:center; margin-top:8px; color:#131312;">
+                Peta menampilkan batas administratif Kabupaten Lombok Tengah dan lokasi setiap kecamatan.
+            </p>
+
+            <p style="text-align:center; margin-top:15px;">
+            <a href="index.html" style="background-color:#11cea5; color:white; padding:8px 16px; border-radius:8px; text-decoration:none;">Kembali ke Login</a>
+            </p>
+        </div>
+        </div>
+
+    <div class="footer">
+        <img src="logo pemerintah .png"width="250"><br>Pemerintah Kabupaten Lombok Tengah<br>
+       Jl. Raden Puguh, Puyung, Kec. Praya, Kabupaten Lombok Tengah, Nusa Tenggara Bar. 83511
+    </div>
+    </div>
+
+<script>
+        var map = L.map('map').setView([-8.703937, 116.290903], 10);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap Contributors'
+        }).addTo(map);
+
+        fetch('lomboktengah.geojson')
+          .then(response => response.json())
+          .then(data => {
+              L.geoJSON(data, {
+                  style: {
+                      color: "#007bff",
+                      weight: 2,
+                      fillOpacity: 0.25
+                  }
+              }).addTo(map);
+          });
+          
+        const kecamatan = [
+            { nama: "Praya Barat", koordinat: [-8.820, 116.120] },
+            { nama: "Praya Barat Daya", koordinat: [-8.855, 116.160] },
+            { nama: "Pujut", koordinat: [-8.850, 116.275] },
+            { nama: "Praya Timur", koordinat: [-8.700, 116.420] },
+            { nama: "Janapria", koordinat: [-8.720, 116.350] },
+            { nama: "Kopang", koordinat: [-8.610, 116.320] },
+            { nama: "Praya", koordinat: [-8.700, 116.280] },
+            { nama: "Praya Tengah", koordinat: [-8.730, 116.250] },
+            { nama: "Jonggat", koordinat: [-8.710, 116.220] },
+            { nama: "Pringgarata", koordinat: [-8.640, 116.230] },
+            { nama: "Batukliang", koordinat: [-8.590, 116.280] },
+            { nama: "Batukliang Utara", koordinat: [-8.550, 116.290] }
+        ];
+
+        kecamatan.forEach(kec => {
+            L.marker(kec.koordinat)
+                .addTo(map)
+                .bindPopup(`<b>${kec.nama}</b>`);
+        });
+    </script>
+</body>
+</html>
